@@ -15,12 +15,13 @@ io.on("connection", (socket) => {
   
   socket.emit("message", "welcome to appCord Chat");
   socket.broadcast.emit("message", "mahdi joined to chat");
+  socket.on("new_message" , msg=>{
+    io.emit("message",msg)
+  });
   socket.on("disconnect", () => {
     io.emit("message", "Some user disconnected");
   });
-  socket.on("new_message" , msg=>{
-    io.emit("message",msg)
-  })
+  
 });
 
 const port = process.env.PORT || 3000;

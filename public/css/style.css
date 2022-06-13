@@ -45,6 +45,7 @@ a {
 	background: #fff;
 	margin: 30px auto;
 	overflow: hidden;
+	display: block;
 }
 
 .chat-header {
@@ -97,6 +98,9 @@ a {
 	background-color: var(--light-color);
 	border-radius: 5px;
 	overflow-wrap: break-word;
+	justify-content: end;
+    display: flex;
+    flex-direction: column;
 }
 
 .chat-messages .message .meta {
