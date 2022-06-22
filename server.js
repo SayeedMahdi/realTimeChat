@@ -2,6 +2,8 @@ const express = require("express");
 require("dotenv").config();
 const http = require("http");
 const socketIo = require("socket.io");
+const format = require("./util/message")
+
 
 //making app module
 const app = express();
@@ -10,16 +12,18 @@ const io = socketIo(server);
 
 //middle wares
 app.use(express.static("./public"));
-
+const chatBot = "ChatBot"
 io.on("connection", (socket) => {
-  
-  socket.emit("message", "welcome to appCord Chat");
-  socket.broadcast.emit("message", "mahdi joined to chat");
+
+  socket.emit("message", format(chatBot,"welcome to appCord Chat"));
+  socket.broadcast.emit("message", format(chatBot,"mahdi joined to chat") );
+
   socket.on("new_message" , msg=>{
-    io.emit("message",msg)
+    io.emit("message",format("User",msg));
   });
+  
   socket.on("disconnect", () => {
-    io.emit("message", "Some user disconnected");
+    io.emit("message", format(chatBot,"Some user disconnected"));
   });
   
 });
